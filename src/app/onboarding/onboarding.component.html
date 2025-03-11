@@ -1,0 +1,40 @@
+<div class="onboarding-container">
+    <h2>Welcome to the Onboarding Process</h2>
+    <form (ngSubmit)="onSubmit()" #onboardingForm="ngForm">
+      
+      <!-- Department Selection -->
+      <div class="form-group">
+        <label for="department">Select Department</label>
+        <select id="department" class="form-control" [(ngModel)]="selectedDepartment" name="department" required>
+          <option value="" disabled selected>Select your department</option>
+          <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+        </select>
+      </div>
+      
+      <!-- Level Selection -->
+      <div class="form-group">
+        <label for="level">Select Level</label>
+        <select id="level" class="form-control" [(ngModel)]="selectedLevel" name="level" required>
+          <option value="" disabled selected>Select your level</option>
+          <option *ngFor="let lvl of levels" [value]="lvl">{{ lvl }}</option>
+        </select>
+      </div>
+      
+      <!-- Courses Selection -->
+      <div class="form-group">
+        <label>Select Courses You've Passed</label>
+        <div *ngFor="let course of courses" class="form-check">
+          <input 
+            type="checkbox" 
+            class="form-check-input" 
+            id="{{ course.id }}" 
+            #checkbox 
+            (change)="onCourseToggle(course.id, checkbox.checked)" />
+          <label class="form-check-label" for="{{ course.id }}">{{ course.name }}</label>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary" [disabled]="!onboardingForm.valid">Submit</button>
+    </form>
+  </div>
+  
